@@ -17,9 +17,9 @@ export default function useApplicationData() {
     //Fetch users from the 3 endpoints and set application state
     const initialFetchData = async () => {
         try {
-            const kids = await axios.get(process.env.REACT_APP_KIDS_ENDPOINT);
-            const adults = await axios.get(process.env.REACT_APP_ADULTS_ENDPOINT);
-            const seniors = await axios.get(process.env.REACT_APP_SENIORS_ENDPOINT);
+            const kids = await axios.get(process.env.REACT_APP_KIDS_ENDPOINT!);
+            const adults = await axios.get(process.env.REACT_APP_ADULTS_ENDPOINT!);
+            const seniors = await axios.get(process.env.REACT_APP_SENIORS_ENDPOINT!);
 
             //set the application state
             setState(prev => ({
@@ -44,11 +44,11 @@ export default function useApplicationData() {
     }, []);
 
     //executes when user clicks the retreive user button / fetches from all 3 endpoints
-    const filterUsers = (minAge, maxAge) => {
+    const filterUsers = (minAge: number, maxAge: number) => {
         //concat all users
         const allUsers = (state.users.kids.concat(state.users.adults)).concat(state.users.seniors)
         
-        const filteredUsers = allUsers.filter(user => {
+        const filteredUsers = allUsers.filter( (user: {age: number}) => {
             let returnValue;
             //If only min age is set
             if(minAge && !maxAge) {
@@ -57,7 +57,7 @@ export default function useApplicationData() {
             } else if(!minAge && maxAge) {
                 user.age <= maxAge ? returnValue = user : returnValue = null;
             } else {
-                user.age >= minAge && user.age <= maxAge ? returnValue = user : returnValue = null;
+                user.age >= minAge && user['age'] <= maxAge ? returnValue = user : returnValue = null;
             }
             
             return returnValue;
@@ -70,8 +70,26 @@ export default function useApplicationData() {
         
     };
 
+    //order the users by first + last name ASC and age DESC
+    const orderUsers = (users: []) => {
+        users.sort((a: {age: number, name: {firstName: string, lastName: string}}, b: {age: number, name: {firstName: string, lastName: string}}) => {
+            const check = a.name.firstName.localeCompare(b.name.firstName);
+            if(check === 0) {
+                const lastCheck = a.name.lastName.localeCompare(b.name.lastName);
+                if (lastCheck === 0) {
+                    return b.age - a.age
+                } else {
+                    return lastCheck;
+                }
+            } else {
+                return check;
+            }
+        });
+        return users;
+    };
+
     //Set the error msg across the app
-    const setErrorMsg = (msg) => {
+    const setErrorMsg = (msg: string) => {
         setState(prev => ({
             ...prev,
             errorMsg: msg
@@ -81,6 +99,7 @@ export default function useApplicationData() {
     return {
         state,
         filterUsers,
+        orderUsers,
         setErrorMsg
     };
 };

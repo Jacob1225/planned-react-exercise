@@ -9,7 +9,7 @@ const Div = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 25%;
+    width: 30%;
     height: 40%;
     border-radius: 10px;
 `
@@ -18,7 +18,7 @@ const H4 = styled.h4`
     margin: 0.5em;
     text-align: center;
 `
-function Filter(props) {
+function Filter(props: {state: {errorMsg: string}, filterUsers: Function, setErrorMsg: Function}) {
     return (
         <Div>
             <H4>{props.state.errorMsg}</H4>

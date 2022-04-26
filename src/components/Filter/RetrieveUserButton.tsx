@@ -14,14 +14,16 @@ const Button = styled.button `
     margin-right: 8em;
 `
 
-function RetrieveUserButton(props) {
+function RetrieveUserButton(props: {state: {errorMsg: string}, filterUsers: Function, setErrorMsg: Function}) {
     const executeFilter = () => {
         //get current value of input fields
-        const minInput = document.getElementById("Min");
-        const maxInput = document.getElementById("Max");
+        let minInput: string;
+        let maxInput: string;
+        minInput = (document.getElementById("Min") as HTMLInputElement).value
+        maxInput = (document.getElementById("Max") as HTMLInputElement).value;
 
-        let minValue = parseInt(minInput.value);
-        let maxValue = parseInt(maxInput.value);
+        let minValue = parseInt(minInput);
+        let maxValue = parseInt(maxInput);
 
         //validate the range of min - max
         if(minValue && maxValue && minValue > maxValue) {

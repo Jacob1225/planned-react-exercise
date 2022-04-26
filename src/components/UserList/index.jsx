@@ -15,6 +15,7 @@ function UserList(props) {
         <Div>
             <UserListTable 
                 state={props.state}
+                orderUsers={props.orderUsers}
                 users={props.users}
             />
         </Div>

@@ -27,6 +27,7 @@ function App() {
   const {
     state,
     filterUsers,
+    orderUsers,
     setErrorMsg
   } = useApplicationData()
   
@@ -43,6 +44,7 @@ function App() {
            
             <UserList 
                 state={state}
+                orderUsers={orderUsers}
                 users={state.filteredUsers.length ? state.filteredUsers : (state.users.kids.concat(state.users.adults)).concat(state.users.seniors)}
             />
         </Div>

@@ -22,10 +22,10 @@ const Input = styled.input`
     font-size: medium;
 `
 
-function FilterInput(props) {
+function FilterInput(props: {name: string, value: string, filterType: string}) {
 
     //Validate that the user does not enter negative numbers
-    const validateMin = (event) => {
+    const validateMin = (event: any) => {
         if(event.target.value < 0) {
             event.target.value = 0;
         }
