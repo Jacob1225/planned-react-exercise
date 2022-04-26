@@ -10,6 +10,7 @@ export default function useApplicationData() {
             adults: [],
             seniors: []
         },
+        filteredUsers: [],
         errorMsg: ""
     });
 
@@ -25,9 +26,9 @@ export default function useApplicationData() {
                 ...prev,
                 users: {
                     ...prev.users,
-                    kids: kids && kids.data ? kids.data.data: [],
-                    adults: adults && adults.data ? adults.data.data : [],
-                    seniors: seniors && seniors.data ? seniors.data.data : []
+                    kids: kids && kids.data.data.length ? kids.data.data: [],
+                    adults: adults && adults.data.data.length ? adults.data.data : [],
+                    seniors: seniors && seniors.data.data.length ? seniors.data.data : []
                 }
             }));   
         } catch (err) {
@@ -58,17 +59,24 @@ export default function useApplicationData() {
             } else {
                 user.age >= minAge && user.age <= maxAge ? returnValue = user : returnValue = null;
             }
+            
             return returnValue;
-        })
-        return filteredUsers;
+        });
+
+        setState(prev => ({
+            ...prev,
+            filteredUsers: filteredUsers.length ? filteredUsers : []
+        }));
+        
     };
 
+    //Set the error msg across the app
     const setErrorMsg = (msg) => {
         setState(prev => ({
             ...prev,
             errorMsg: msg
         }));
-    }
+    };
 
     return {
         state,

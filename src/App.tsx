@@ -3,9 +3,24 @@ import styled from 'styled-components';
 import useApplicationData from "./hooks/useApplicationData";
 import Header from './components/Header'
 import Filter from './components/Filter';
+import UserList from './components/UserList';
+
+const AppDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
 const H2 = styled.h2`
-  color: #364558;
+    margin: 1em 8em;
+    color: #364558;
+
+`
+
+const Div = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: 0 auto;
 `
 
 function App() {
@@ -14,17 +29,24 @@ function App() {
     filterUsers,
     setErrorMsg
   } = useApplicationData()
- 
+  
   return (
-    <div className="App">
-      <Header />
-      <H2>Users</H2>
-      <Filter 
-        state={state}
-        filterUsers={ filterUsers }
-        setErrorMsg = { setErrorMsg }
-      />
-    </div>
+    <AppDiv>
+        <Header />
+        <H2>Users</H2>
+        <Div>
+            <Filter 
+            state={state}
+            filterUsers={ filterUsers }
+            setErrorMsg = { setErrorMsg }
+            />
+           
+            <UserList 
+                state={state}
+                users={state.filteredUsers.length ? state.filteredUsers : (state.users.kids.concat(state.users.adults)).concat(state.users.seniors)}
+            />
+        </Div>
+    </AppDiv>
   );
 }
 

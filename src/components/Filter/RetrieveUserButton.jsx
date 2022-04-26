@@ -28,13 +28,10 @@ function RetrieveUserButton(props) {
             props.setErrorMsg("Invalid Range - Max must be >= Min");
             return;
         }
-
-        const users = props.filterUsers(minValue, maxValue);
-
+        
         //If range is valid remove error
         props.setErrorMsg("");
-        console.log('users', users);
-        console.log(props.state);
+        props.filterUsers(minValue, maxValue);
     }
     return (
         <Button type="button" onClick= {() => executeFilter()}>Retrieve Users</Button>

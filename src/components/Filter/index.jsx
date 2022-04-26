@@ -9,7 +9,8 @@ const Div = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    width: 25%;
+    height: 40%;
     border-radius: 10px;
 `
 const H4 = styled.h4`
