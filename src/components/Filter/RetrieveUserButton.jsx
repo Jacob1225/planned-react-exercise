@@ -1,4 +1,4 @@
-import React, { setState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button `
@@ -19,7 +19,7 @@ function RetrieveUserButton(props) {
         //get current value of input fields
         const minInput = document.getElementById("Min");
         const maxInput = document.getElementById("Max");
-        
+
         let minValue = parseInt(minInput.value);
         let maxValue = parseInt(maxInput.value);
 
@@ -29,20 +29,11 @@ function RetrieveUserButton(props) {
             return;
         }
 
-        //set the filter
-        // if((minInput.value && !maxInput.value) || (minInput.value && maxInput.value && minInput.value > maxInput.value)) {
-        //     maxValue = minInput.value;
-        // } else if(maxInput.value && !minInput.value) {
-        //     minValue = 0;
-        // } else if (!minInput.value && !maxInput.value) {
-        //     minValue = -1;
-        //     maxValue = -1;
-        // }
-
         const users = props.filterUsers(minValue, maxValue);
 
         //If range is valid remove error
         props.setErrorMsg("");
+        console.log('users', users);
         console.log(props.state);
     }
     return (

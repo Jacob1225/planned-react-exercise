@@ -44,22 +44,23 @@ export default function useApplicationData() {
 
     //executes when user clicks the retreive user button / fetches from all 3 endpoints
     const filterUsers = (minAge, maxAge) => {
-        console.log(typeof(minAge), maxAge);
         //concat all users
         const allUsers = (state.users.kids.concat(state.users.adults)).concat(state.users.seniors)
         
-        if(minAge && !maxAge) {
+        const filteredUsers = allUsers.filter(user => {
+            let returnValue;
+            //If only min age is set
+            if(minAge && !maxAge) {
+                user.age >= minAge ? returnValue = user : returnValue = null;
 
-        }
-        // const filteredUsers= allUsers.filter(user => {
-        //     // if((minAge && maxAge && minAge <= maxAge) && user.age >= minAge && user.age <= maxAge) {
-        //     //     return user;
-        //     // } else if((minAge && maxAge && minAge > maxAge) && user.){
-        //     //     return null;
-        //     // }
-        // })
-        // return filteredUsers;
-        return [];
+            } else if(!minAge && maxAge) {
+                user.age <= maxAge ? returnValue = user : returnValue = null;
+            } else {
+                user.age >= minAge && user.age <= maxAge ? returnValue = user : returnValue = null;
+            }
+            return returnValue;
+        })
+        return filteredUsers;
     };
 
     const setErrorMsg = (msg) => {
