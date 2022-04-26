@@ -12,12 +12,16 @@
     "start:server": "node server/server.js"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "faker": "^4.1.0",
     "fastify": "^2.14.1",
     "fastify-cors": "^3.0.3",
+    "latest": "^0.2.0",
+    "n": "^8.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "stable": "^0.1.8",
     "styled-components": "^5.1.1",
     "typescript": "^3.9.5"
   },

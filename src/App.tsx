@@ -1,21 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import useApplicationData from "./hooks/useApplicationData";
+import Header from './components/Header'
+import Filter from './components/Filter';
 
-const API_URL = 'http://localhost:8099'
+const H2 = styled.h2`
+  color: #364558;
+`
 
 function App() {
+  const {
+    state,
+    filterUsers,
+    setErrorMsg
+  } = useApplicationData()
+ 
   return (
     <div className="App">
-      <h1>Planned Test</h1>
-      <div>
-        <button type="button">Retrieve Users</button>
-      </div>
-      <div>
-        <h2>Users</h2>
-        min: <input name="minAge" value="0" type="number" />
-        max: <input name="maxAge" value="100" type="number" />
-        <button type="button">Filter by age</button>
-      </div>
+      <Header />
+      <H2>Users</H2>
+      <Filter 
+        state={state}
+        filterUsers={ filterUsers }
+        setErrorMsg = { setErrorMsg }
+      />
     </div>
   );
 }
