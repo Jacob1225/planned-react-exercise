@@ -24,7 +24,7 @@ const H3 = styled.h3`
 `
 
 
-function UserListTable(props) {
+function UserListTable(props: {orderUsers: Function, users: any[]}) {
     //order users
     const orderedUsers = props.orderUsers(props.users);
     return (
@@ -39,7 +39,7 @@ function UserListTable(props) {
                     <Arrows/>
                 </ColumnHeader>
             </RowHeader>
-            {orderedUsers.map(user => 
+            {orderedUsers.map((user: {email: string, name: {firstName: string, lastName: string}, age: number}) =>
                 <UserListRow 
                     key={user.email}
                     name={user.name.firstName + " " + user.name.lastName}

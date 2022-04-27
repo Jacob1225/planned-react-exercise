@@ -10,11 +10,10 @@ const Div = styled.div`
     width: 60%;
 `
 
-function UserList(props) {
+function UserList(props: {orderUsers: Function, users: any[]}) {
     return (
         <Div>
             <UserListTable 
-                state={props.state}
                 orderUsers={props.orderUsers}
                 users={props.users}
             />

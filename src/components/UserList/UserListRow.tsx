@@ -30,7 +30,7 @@ const Age = styled.span`
 `
 
 
-function UserListRow(props) {
+function UserListRow(props: {key: string, name: string, age: number}) {
     return (
         <Div>
             <Name>
