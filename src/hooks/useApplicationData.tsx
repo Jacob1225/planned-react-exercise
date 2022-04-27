@@ -47,17 +47,18 @@ export default function useApplicationData() {
     const filterUsers = (minAge: number, maxAge: number) => {
         //concat all users
         const allUsers = (state.users.kids.concat(state.users.adults)).concat(state.users.seniors)
-        
+      
         const filteredUsers = allUsers.filter( (user: {age: number}) => {
             let returnValue;
+            
             //If only min age is set
-            if(minAge && !maxAge) {
+            if((!isNaN(minAge)) && isNaN(maxAge)) {
                 user.age >= minAge ? returnValue = user : returnValue = null;
 
-            } else if(!minAge && maxAge) {
+            } else if(isNaN(minAge) && !isNaN(maxAge)) {
                 user.age <= maxAge ? returnValue = user : returnValue = null;
-            } else {
-                user.age >= minAge && user['age'] <= maxAge ? returnValue = user : returnValue = null;
+            } else{
+                user.age >= minAge && user.age <= maxAge ? returnValue = user : returnValue = null;
             }
             
             return returnValue;
