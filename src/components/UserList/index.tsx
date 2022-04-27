@@ -16,7 +16,7 @@ const SearchBar = styled.div`
     border-bottom: 1px solid #d4d4da;
 
 `
-const Input = styled.input`
+const Input = styled.input` 
     border-radius: 5px;
     color: rgba(0, 0, 0, 0.5);
     font-size: 19px;

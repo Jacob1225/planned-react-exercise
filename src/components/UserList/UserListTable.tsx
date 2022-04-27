@@ -23,7 +23,7 @@ const H3 = styled.h3`
     margin: 0 0.5em;
 `
 
-const ArrowStyle = { marginTop: "0.3em", cursor: "pointer", }
+const ArrowStyle = { marginTop: "0.3em", cursor: "pointer"}
 
 
 function UserListTable(props: {orderUsers: Function, users: any[]}) {
@@ -41,9 +41,10 @@ function UserListTable(props: {orderUsers: Function, users: any[]}) {
                     <Arrows id="age-arrow" style={ArrowStyle}/>
                 </ColumnHeader>
             </RowHeader>
-            {orderedUsers.map((user: {email: string, name: {firstName: string, lastName: string}, age: number}) =>
+            {orderedUsers.map((user: {email: string, name: {firstName: string, lastName: string}, age: number}, index: number) =>
                 <UserListRow 
                     key={user.email}
+                    position={orderedUsers.length -1 === index ? -1 : index}
                     name={user.name.firstName + " " + user.name.lastName}
                     age={user.age}
                     

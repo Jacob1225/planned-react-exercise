@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Div = styled.div`
     margin: 1em 0;
-    border-bottom: 1px solid #d4d4da;
     display: flex;
     justify-content: space-between;
 `
@@ -28,11 +27,13 @@ const Age = styled.span`
     color: #364558;
     font-size: 18px;
 `
+const BorderStyle = { borderBottom: "1px solid #d4d4da"}
+const BorderNone = { borderBottom: "none"}
 
 
-function UserListRow(props: {key: string, name: string, age: number}) {
+function UserListRow(props: {key: string, position: number, name: string, age: number}) {
     return (
-        <Div>
+        <Div style={props.position !== -1 ? BorderStyle : BorderNone}>
             <Name>
                 <Input type="checkbox"></Input>
                 <NameSpan>{props.name}</NameSpan>
